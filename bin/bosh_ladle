@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'bosh_ladle/cli'
+
+return_code = BOSHLadle::Cli.new.run(ARGV)
+exit return_code.to_i
