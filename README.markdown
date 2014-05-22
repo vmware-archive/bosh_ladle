@@ -7,9 +7,17 @@
 1. a large long-handled spoon with a cup-shaped bowl, used for serving soup, stew, or sauce.
 2. a small single-command CLI tool used for deploying [BOSH-lite](http://github.com/cloudfoundry/bosh-lite) to the first VPC in an AWS account.
 
-This script is meant to spin up BOSH lite VMs inside the GoCD VPC on AWS.
-  It requires AWS credentials stored in the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables to use EC2.
-  Furthermore, it uses the most recently created BOSH-lite AMI available on the AWS marketplace to create the VM.
+This script is meant to spin up BOSH lite VMs inside the GoCD VPC on AWS.  It requires AWS credentials stored in the
+AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables to use EC2. Furthermore, it uses the most recently
+created BOSH-lite AMI available on the AWS marketplace to create the VM.
+
+## Installation
+
+`gem install bosh_ladle`
+
+If you are using rbenv you will need to rbenv rehash.
+
+## Usage
 
 ```
 Options:
@@ -21,10 +29,28 @@ Options:
    --name, -n <s>:            A name passed to the BOSH lite image (e.g. <team-name>)
    --help, -h:                Show this message
 ```
-```
-$ AWS_ACCESS_KEY_ID=ACKACKACKACKACKACK \
+
+## Examples
+
+Minimal:
+
+```sh
+AWS_ACCESS_KEY_ID=ACKACKACKACKACKACK \
 AWS_SECRET_ACCESS_KEY=foo+bar \
-./bin/bosh_ladle \
+bosh_ladle \
 --subnet-id 'subnet-deadbeef' \
+--name 'sasquatch'
+```
+
+Full:
+
+```sh
+AWS_ACCESS_KEY_ID=ACKACKACKACKACKACK \
+AWS_SECRET_ACCESS_KEY=foo+bar \
+bosh_ladle \
+--instance-type m3.xlarge \
+--subnet-id 'subnet-deadbeef' \
+--security-group topsecret \
+--key-pair gocd_bosh_lite \
 --name 'sasquatch'
 ```
