@@ -11,8 +11,6 @@ module BOSHLadle
 
     def run(args)
 
-      raise ArgumentError.new('Please set AWS_ACCESS_KEY_ID in the environment') if ENV['AWS_ACCESS_KEY_ID'].nil?
-      raise ArgumentError.new('Please set AWS_SECRET_ACCESS_KEY in the environment') if ENV['AWS_SECRET_ACCESS_KEY'].nil?
 
       @opts = Trollop::options(args) do
         banner <<-PROGINFO
@@ -28,6 +26,10 @@ module BOSHLadle
         opt :key_pair, "The key pair to use (must be available in AWS)",            :type => :string, :default => 'gocd_bosh_lite'
         opt :name, "A name passed to the BOSH lite image (e.g. <team-name>)",       :type => :string, required: true
       end
+
+      raise ArgumentError.new('Please set AWS_ACCESS_KEY_ID in the environment') if ENV['AWS_ACCESS_KEY_ID'].nil?
+      raise ArgumentError.new('Please set AWS_SECRET_ACCESS_KEY in the environment') if ENV['AWS_SECRET_ACCESS_KEY'].nil?
+
 
       ec2 = AWS::EC2.new(
           :access_key_id => ENV['AWS_ACCESS_KEY_ID'],

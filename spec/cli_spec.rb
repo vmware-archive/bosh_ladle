@@ -8,17 +8,25 @@ module BOSHLadle
     let(:key_secret) { 'barz' }
     let(:fake_ec2) { double('ec2') }
 
-    def silence_stderr
+    def capture_stdio
       stderr_io = $stderr
+      stdout_io = $stdout
+
       $stderr = StringIO.new
+      $stdout = StringIO.new
 
       yield
 
       $stderr.rewind
-      stuff_printed_to_stderr_during_yield = $stderr.read
-      $stderr = stderr_io
+      $stdout.rewind
 
-      stuff_printed_to_stderr_during_yield
+      stuff_printed_to_stderr_during_yield = $stderr.read
+      stuff_printed_to_stdout_during_yield = $stdout.read
+
+      $stderr = stderr_io
+      $stdout = stdout_io
+
+      return stuff_printed_to_stderr_during_yield, stuff_printed_to_stdout_during_yield
     end
 
     describe '#run' do
@@ -52,13 +60,13 @@ module BOSHLadle
       end
 
       it 'raises if you do not provide required options' do
-        silence_stderr do
+        capture_stdio do
           expect { cli.run([]) }.to raise_error(SystemExit)
         end
       end
 
       it 'raises if you provide invalid options' do
-        stderr = silence_stderr do
+        stderr, _ = capture_stdio do
           expect { cli.run(%w(-a abc -x efg)) }.to raise_error(SystemExit)
         end
 
@@ -85,6 +93,11 @@ module BOSHLadle
 
         ENV.delete('AWS_SECRET_ACCESS_KEY')
         expect { cli.run(%w(-s s -n n)) }.to raise_error(ArgumentError, 'Please set AWS_SECRET_ACCESS_KEY in the environment')
+      end
+
+      it 'shows usage information' do
+        ENV.delete('AWS_SECRET_ACCESS_KEY')
+        expect { capture_stdio { cli.run(%w(-h)) } }.to raise_exception SystemExit
       end
 
       it 'returns a status code' do
