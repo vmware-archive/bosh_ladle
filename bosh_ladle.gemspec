@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'support@cloudfoundry.com'
   s.files         = `git ls-files -- lib/*`.split($/)
   s.executables   = ['bosh_ladle']
-  s.homepage    = 'https://github.com/pivotal-cf-experimental/gocd_scripts'
+  s.homepage    = 'https://github.com/pivotal-cf-experimental/bosh_ladle'
 
   s.add_dependency 'trollop'
   s.add_dependency 'aws-sdk'
