@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/pivotal-cf-experimental/bosh_ladle.png)](https://codeclimate.com/github/pivotal-cf-experimental/bosh_ladle) [![Build Status](https://travis-ci.org/pivotal-cf-experimental/bosh_ladle.png)](https://travis-ci.org/pivotal-cf-experimental/bosh_ladle)
+
 #BOSH Ladle
 
 *noun*
@@ -14,7 +16,7 @@ Options:
    --instance-type, -i <s>:   AWS instance type to use (default: m3.xlarge)
    --subnet-id, -s <s>:       The subnet ID to put the VM into (e.g. 'subnet-123abc45')
    --security-group, -g <s>:  The security group to put the VM into (default: bosh)
-   --key-pair, -k <s>:        The key pair to use (must be available in AWS) 
+   --key-pair, -k <s>:        The key pair to use (must be available in AWS)
                               (default: gocd_bosh_lite)
    --name, -n <s>:            A name passed to the BOSH lite image (e.g. <team-name>)
    --help, -h:                Show this message
