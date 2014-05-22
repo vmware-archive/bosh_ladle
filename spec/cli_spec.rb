@@ -44,7 +44,7 @@ module BOSHLadle
       end
 
       it 'parses command line options' do
-        cli.run(%w(-i i -s s -g g -k k -n n))
+        cli.run(%w(-i i -s s -g g -k k -n n -d 78))
 
         expect(cli.opts).to eq({help: false,
                                 instance_type: 'i',
@@ -56,7 +56,9 @@ module BOSHLadle
                                 security_group: 'g',
                                 security_group_given: true,
                                 subnet_id: 's',
-                                subnet_id_given: true})
+                                subnet_id_given: true,
+                                disk_size: 78,
+                                disk_size_given: true})
       end
 
       it 'raises if you do not provide required options' do
@@ -83,7 +85,8 @@ module BOSHLadle
                                 name_given: true,
                                 security_group: 'bosh',
                                 subnet_id: 's',
-                                subnet_id_given: true})
+                                subnet_id_given: true,
+                                disk_size: 40})
       end
 
       it 'raises ArgumentError if AWS credentials are not in env' do
@@ -110,10 +113,12 @@ module BOSHLadle
         security_group = 'where-am-i'
         key_pair = 'ham-and-pears'
         instance_type = 'miniscule'
+        disk_size = '77'
 
-        expect(BOSHLite).to receive(:spinup).with(fake_ec2, subnet, name, security_group, key_pair, instance_type)
+        expect(BOSHLite).to receive(:spinup).with(fake_ec2, subnet, name, security_group, key_pair, instance_type,
+                                                  disk_size.to_i)
 
-        cli.run ['-s', subnet, '-n', name, '-g', security_group, '-k', key_pair, '-i', instance_type]
+        cli.run ['-s', subnet, '-n', name, '-g', security_group, '-k', key_pair, '-i', instance_type, '-d', disk_size]
       end
     end
   end

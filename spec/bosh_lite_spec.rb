@@ -13,6 +13,7 @@ module BOSHLadle
     let(:security_group) { 'secluded-corner-of-the-internet' }
     let(:key_pair_name) { 'magic-sauce' }
     let(:instance_type) { 'rotund' }
+    let(:disk_size) { 45 }
     let(:logger) { double('Logger').as_null_object }
 
     before do
@@ -26,7 +27,15 @@ module BOSHLadle
                                                   subnet_id:        subnet_id,
                                                   security_groups:  security_group,
                                                   key_name:         key_pair_name,
-                                                  instance_type:    instance_type}).and_return(fake_instance)
+                                                  instance_type:    instance_type,
+                                                  block_device_mappings: [
+                                                    {
+                                                        device_name: '/dev/sda1',
+                                                        ebs: {
+                                                            volume_size: disk_size
+                                                        }
+                                                    },
+                                                  ]}).and_return(fake_instance)
       expect(fake_instance).to receive(:tag).with('Name', value: name)
 
       pendings  = [:pending]*3
@@ -37,7 +46,7 @@ module BOSHLadle
       expect(fake_instance).to receive(:private_ip_address).and_return(*nils, 'Mars')
       expect(logger).to receive(:info).with(/Mars/)
 
-      BOSHLite.spinup(ec2, subnet_id, name, security_group, key_pair_name, instance_type, logger)
+      BOSHLite.spinup(ec2, subnet_id, name, security_group, key_pair_name, instance_type, disk_size, logger)
     end
   end
 end

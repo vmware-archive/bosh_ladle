@@ -3,13 +3,16 @@ require 'logger'
 
 module BOSHLadle
   class BOSHLite
-    def self.spinup(ec2, subnet, name, security_group, key_pair_name, instance_type, logger=Logger.new(STDOUT))
+    def self.spinup(ec2, subnet, name, security_group, key_pair_name, instance_type, disk_size, logger=Logger.new(STDOUT))
       instance = ec2.vpcs.first.instances.create(
           subnet_id: subnet,
           image_id: AMI.latest,
           security_groups: security_group,
           key_name: key_pair_name,
-          instance_type: instance_type
+          instance_type: instance_type,
+          block_device_mappings: [
+              {device_name: '/dev/sda1', ebs: {volume_size: disk_size}},
+          ]
       )
       instance.tag('Name', value: name)
 
