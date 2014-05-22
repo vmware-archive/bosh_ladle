@@ -9,15 +9,13 @@ This script is meant to spin up BOSH lite VMs inside the GoCD VPC on AWS.
   It requires AWS credentials stored in the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables to use EC2.
   Furthermore, it uses the most recently created BOSH-lite AMI available on the AWS marketplace to create the VM.
 
-```
-  Options:
+Options:
    --instance-type, -i <s>:   AWS instance type to use (default: m3.xlarge)
    --subnet-id, -s <s>:       The subnet ID to put the VM into (e.g. 'subnet-123abc45')
    --security-group, -g <s>:  The security group to put the VM into (default: bosh)
-        --key-pair, -k <s>:   The key pair to use (must be available in AWS) (default: gocd_bosh_lite)
-            --name, -n <s>:   A name passed to the BOSH lite image (e.g. <team-name>)
-                --help, -h:   Show this message
-```
+   --key-pair, -k <s>:        The key pair to use (must be available in AWS) (default: gocd_bosh_lite)
+   --name, -n <s>:            A name passed to the BOSH lite image (e.g. <team-name>)
+   --help, -h:                Show this message
 
 ```
 $ AWS_ACCESS_KEY_ID=ACKACKACKACKACKACK \
