@@ -36,21 +36,21 @@ Minimal:
 
 ```sh
 AWS_ACCESS_KEY_ID=ACKACKACKACKACKACK \
-AWS_SECRET_ACCESS_KEY=foo+bar \
+AWS_SECRET_ACCESS_KEY=foobar \
 bosh_ladle \
---subnet-id 'subnet-deadbeef' \
---name 'sasquatch'
+--subnet-id subnet-deadbeef \
+--name sasquatch
 ```
 
 Full:
 
 ```sh
 AWS_ACCESS_KEY_ID=ACKACKACKACKACKACK \
-AWS_SECRET_ACCESS_KEY=foo+bar \
+AWS_SECRET_ACCESS_KEY=foobar \
 bosh_ladle \
 --instance-type m3.xlarge \
---subnet-id 'subnet-deadbeef' \
+--subnet-id subnet-deadbeef \
 --security-group topsecret \
 --key-pair gocd_bosh_lite \
---name 'sasquatch'
+--name sasquatch
 ```
