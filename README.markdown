@@ -20,14 +20,14 @@ If you are using rbenv you will need to rbenv rehash.
 ## Usage
 
 ```
-Options:
+  Options:
    --instance-type, -i <s>:   AWS instance type to use (default: m3.xlarge)
-   --subnet-id, -s <s>:       The subnet ID to put the VM into (e.g. 'subnet-123abc45')
-   --security-group, -g <s>:  The security group to put the VM into (default: bosh)
-   --key-pair, -k <s>:        The key pair to use (must be available in AWS)
-                              (default: gocd_bosh_lite)
-   --name, -n <s>:            A name passed to the BOSH lite image (e.g. <team-name>)
-   --help, -h:                Show this message
+       --subnet-id, -s <s>:   The subnet ID to put the VM into (e.g. 'subnet-123abc45')
+  --security-group, -g <s>:   The security group to put the VM into (default: bosh)
+        --key-pair, -k <s>:   The key pair to use (must be available in AWS) (default: gocd_bosh_lite)
+            --name, -n <s>:   A name passed to the BOSH lite image (e.g. <team-name>)
+       --disk-size, -d <i>:   Root disk size in GB (default: 40)
+                --help, -h:   Show this message
 ```
 
 ## Examples
