@@ -1,3 +1,7 @@
+# Deprecated
+
+This gem is deprecated and is no longer being maintained.
+
 [![Code Climate](https://codeclimate.com/github/pivotal-cf-experimental/bosh_ladle.png)](https://codeclimate.com/github/pivotal-cf-experimental/bosh_ladle) [![Build Status](https://travis-ci.org/pivotal-cf-experimental/bosh_ladle.png)](https://travis-ci.org/pivotal-cf-experimental/bosh_ladle)
 
 #BOSH Ladle
