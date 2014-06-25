@@ -1,6 +1,8 @@
 # Deprecated
 
-This gem is deprecated and is no longer being maintained.
+This gem is deprecated and is no longer being maintained. Vagrant is now being used to deploy bosh-lite.
+
+See https://github.com/cloudfoundry/bosh-lite/blob/master/aws/Vagrantfile
 
 [![Code Climate](https://codeclimate.com/github/pivotal-cf-experimental/bosh_ladle.png)](https://codeclimate.com/github/pivotal-cf-experimental/bosh_ladle) [![Build Status](https://travis-ci.org/pivotal-cf-experimental/bosh_ladle.png)](https://travis-ci.org/pivotal-cf-experimental/bosh_ladle)
 
